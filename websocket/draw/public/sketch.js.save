@@ -1,11 +1,9 @@
-
 var socket;
 
 function setup() {
-	console.log('instance');
 	var myCanvas = createCanvas(800, 800);
 	myCanvas.parent('container');
-	socket = io.connect('http://18.221.234.35');
+	socket = io.connect('http://');
 	socket.on('mouse', newDrawing);
 	
 }

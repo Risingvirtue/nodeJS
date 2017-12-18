@@ -11,7 +11,7 @@ var noDraw = false;
 var erase = false;
 $(document).ready(function() {
 	
-	socket = io.connect('http://localhost:3000');
+	socket = io.connect('http://18.221.234.35');
 	socket.on('mouse', otherDraw);
 	$("#pencil").toggleClass("select");
 	
