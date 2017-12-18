@@ -10,11 +10,9 @@ var rect = canvas.getBoundingClientRect();
 var noDraw = false;
 var erase = false;
 $(document).ready(function() {
-	
 	socket = io.connect('http://localhost:3000');
 	socket.on('mouse', otherDraw);
 	$("#pencil").toggleClass("select");
-	
 	$("#pencil").click(function() {
 		if (erase) {
 			erase = false;
@@ -33,13 +31,10 @@ $(document).ready(function() {
 	
 });
 
-
-
 function otherDraw(data) {
 	if (data.erase) {
 		ctx.beginPath();
 		ctx.strokeStyle = "white";
-	
 		ctx.moveTo(data.x1, data.y1);
 		ctx.lineCap = 'round';
 		ctx.lineWidth = 40;
@@ -62,12 +57,10 @@ document.body.addEventListener("mousedown", function (e) {
 	mouseDown = true;
 	mousePos.x = e.pageX - rect.left;
 	mousePos.y = e.pageY - rect.top;
-	
 });
 
 document.body.addEventListener("mouseup", function (e) {
 	mouseDown = false;
-	
 });
 
 document.body.addEventListener("mousemove", function (e) {
@@ -103,7 +96,4 @@ document.body.addEventListener("mousemove", function (e) {
 		ctx.closePath();
 		mousePos.x = eX; mousePos.y = eY;
 	}
-	
-	
 });
-
