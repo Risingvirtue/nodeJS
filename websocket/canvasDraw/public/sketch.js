@@ -97,6 +97,7 @@ function join() {
 		name = n;
 	}
 	$('.modal').css('display', 'none');
+	noDraw = false;
 }
 function switchPen(s) {
 	$("#" + size[currPen] + "Pen").toggleClass("selectSize");
