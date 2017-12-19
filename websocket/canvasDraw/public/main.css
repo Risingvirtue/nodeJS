@@ -1,6 +1,6 @@
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
+    display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -21,11 +21,17 @@
     width: 50%; /* Could be more or less, depending on screen size */
 }
 
-#canvas {
+.border {
 	border-style: solid;
 	border-width: 5px;
 	border-color: #6A5ACD;
+}
+#canvas {
+	
 	border-radius: 10%;
+	z-index: -1;
+	pointer-events: none;
+
 }
 
 
@@ -67,14 +73,140 @@
 	opacity: 0.8;
     cursor: pointer;
 }
-.fa {
-	position: relative;
-	top:-30px;
-    right:0;
-    width:30px;
-    height:30px;
-}
+
 
 .select {
 	color: red;
 }
+
+.inline  {
+	display: inline;
+}
+
+.fa {
+	font-size: 30px;
+	margin: 10px;
+}
+
+.left {
+	display: inline-block;
+	margin-right: 63px;
+	margin-top: 55px;
+	vertical-align: top;
+	
+}
+.btn {
+	margin: 0px;
+	height: 50px;
+	border-radius: 0%;
+	border-color: #9370DB;
+	border-style: solid;
+	border-width: 2px;
+	width: 50px;
+	background-color: white;
+}
+.pencilSize {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	visibility: hidden;
+	
+}
+
+
+.eraserSize {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	visibility: hidden;
+}
+
+
+.selectSize {
+	background-color: #EE82EE;
+}
+.absolute {
+	position: absolute;
+
+}
+
+.lowerErase {
+	margin-top: 50px;
+	margin-right: 100px;
+}
+.dot {
+	margin-left: -5px;
+	z-index: 2;
+	
+}
+
+.circle {
+	background-color: black;
+	border-radius: 50%;
+	margin: auto;
+}
+.blank {
+	background-color: white;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
+
+.xs  {
+	width: 5px;
+	height: 5px;
+}
+.sm {
+	width: 10px;
+	height: 10px;
+}
+
+.md {
+	width: 15px;
+	height: 15px;
+}
+.lg {
+	width: 20px;
+	height: 20px;
+}
+
+.box {
+	display: inline-block;
+	margin-left: -9px;
+	vertical-align: top;
+}
+
+#text {
+	margin-left: 1px;
+	margin-bottom: 0px;
+	margin-top: 55px;
+	float: left;
+	height: 400px;
+	width: 100%;
+	
+	
+}
+
+#message {
+	margin-left: 1px;
+	margin-top: -5px;
+	height: 95px;
+	float: left;
+	
+	
+}
+textarea {
+    resize: none;
+	overflow:hidden;
+	
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+#send {
+	height: 90px;
+}
+
+

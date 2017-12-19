@@ -20,13 +20,44 @@
 	<body>
 		
 		<div class="container-fluid">
+			
 			<div class="row text-center">
-				<canvas id="canvas" height="600" width="800"></canvas>
-				<i id="pencil" class="fa fa-pencil" aria-hidden="true"></i>
-				<i id="eraser" class="fa fa-eraser" aria-hidden="true"></i>
+				<div class="left">
+					<div class="absolute">
+						<button id="pencilButton" class="btn text-center" style="width: 70px"><i id="pencil" style="margin:auto"  class="fa fa-pencil" aria-hidden="true"></i></button>
+						<div class="pencilSize">
+							<button id="xsPen" class="btn dot" onclick="switchPen(0)"><div class="xs circle"></div></button>
+							<button id="smPen" class="btn dot" onclick="switchPen(1)"><div class="sm circle"></div></button>
+							<button id="mdPen" class="btn dot" onclick="switchPen(2)"><div class="md circle"></div></button>
+							<button id="lgPen" class="btn dot" onclick="switchPen(3)"><div class="lg circle"></div></button>
+						</div>
+					</div>	
+						
+				
+					<div class="absolute lowerErase">
+						<button id="eraserButton" class="btn text-center" style="width: 70px"><i id="eraser" class="fa fa-eraser" style="margin:auto" aria-hidden="true"></i></button>
+						<div class="eraserSize">
+							<button id="xsEraser" class="btn dot" onclick="switchEraser(0)"><div class="xs circle blank"></div></button>
+							<button id="smEraser" class="btn dot" onclick="switchEraser(1)"><div class="sm circle blank"></div></button>
+							<button id="mdEraser" class="btn dot" onclick="switchEraser(2)"><div class="md circle blank"></div></button>
+							<button id="lgEraser" class="btn dot" onclick="switchEraser(3)"><div class="lg circle blank"></div></button>
+						</div>
+					</div>
+				</div>
+				<div class="inline">
+					<canvas id="canvas" class="border" height="600" width="800"></canvas>
+				</div>
+				<div class="box"> 
+					<textarea readonly class="border" id="text"></textarea>
+					<div>
+						<textarea class="border" id="message" type="text"></textarea>
+						<button id="send" class="text-center" onclick="send()">Send</button>
+					</div>
+				</div>
 			</div>
+			
 			<div class="text-center row">
-				<label class="col-lg-4 col-md-4 col-xs-4 col-sm-4"></label>
+				<label class="col-lg-3 col-md-3 col-xs-3 col-sm-3"></label>
 				<div id="slidecontainer" class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
 					<input id="slider" type="range" min="0" max="179" value="90" class="slider" oninput="changeColor()">
 				</div>
@@ -40,9 +71,9 @@
 			
 			<div class="modal-content text-center">
 				<p>What is your name?</p>
-				<div><input type="text" placeholder="e.g. Jellyfish" /></div>
+				<div><input id="name" type="text" placeholder="e.g. Jellyfish" /></div>
 				<br>
-				<button class="btn">Join</button>
+				<button style="margin: auto" onclick="join()">Join</button>
 			</div>
 		</div>
 	</body>
