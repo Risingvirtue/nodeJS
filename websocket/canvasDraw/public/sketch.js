@@ -21,7 +21,7 @@ $(document).ready(function() {
 	socket = io.connect('http://18.221.234.35');
 	socket.on('mouse', draw);
 	socket.on('dot', dotDraw);
-	socket.on('color', determineColor);
+	//socket.on('color', determineColor);
 	socket.on('send', reSend);
 	$("#pencil").toggleClass("select");
 	$("#smPen").toggleClass("selectSize");
@@ -31,6 +31,7 @@ $(document).ready(function() {
 			erase = false;
 			$("#pencil").toggleClass("select");
 			$("#eraser").toggleClass("select");
+			$(".eraserSize").css("visibility", "hidden");
 		} else {
 			var visible = $(".pencilSize").css("visibility");
 		
@@ -48,6 +49,7 @@ $(document).ready(function() {
 			erase = true;
 			$("#pencil").toggleClass("select");
 			$("#eraser").toggleClass("select");
+			$(".pencilSize").css("visibility", "hidden");
 		} else {
 			var visible = $(".eraserSize").css("visibility");
 			if (visible == "visible") {
@@ -62,6 +64,7 @@ $(document).ready(function() {
 
 	$(window).resize(function() {
 		rect = canvas.getBoundingClientRect();
+		colorRect =  colorCanvas.getBoundingClientRect();
 	});
 });
 
@@ -97,7 +100,11 @@ function join() {
 		name = n;
 	}
 	$('.modal').css('display', 'none');
+	
 	noDraw = false;
+	$("#message").focus();
+	
+	
 }
 function switchPen(s) {
 	$("#" + size[currPen] + "Pen").toggleClass("selectSize");
@@ -115,6 +122,7 @@ function switchEraser(s) {
 
 function send() {
 	var message = $("#message").val();
+	message = message.split('\n').join('');
 	if (message != "") {
 		$("#text").val($("#text").val() + name + ": " + message + "\n");
 		$("#message").val("");
@@ -130,6 +138,8 @@ function reSend(data) {
 
 document.body.addEventListener("mousedown", function (e) {
 	mouseDown = true;
+	//var x = colorRect.left;
+	//console.log(e.pageX);
 	mousePos.x = e.pageX - rect.left;
 	mousePos.y = e.pageY - rect.top;
 	var data = {x: mousePos.x, y: mousePos.y};
@@ -175,5 +185,16 @@ document.body.addEventListener("mousemove", function (e) {
 		mousePos.x = eX; mousePos.y = eY;
 	}
 
+});
+
+document.body.addEventListener("keyup", function (e) {
+	var keyCode = e.keyCode;
+	if (keyCode == '13') {
+		if (noDraw) {
+			join();
+		} else {
+			send();
+		}
+	}
 });
 

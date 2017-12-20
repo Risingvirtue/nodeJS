@@ -23,7 +23,7 @@ function newConnection(socket) {
 	console.log('New Connection: ' + socket.id);
 	
 	socket.on('mouse', mouseMsg);
-	socket.emit('color', color());
+	//socket.emit('color', color());
 	function mouseMsg(data) {
 		
 		socket.broadcast.emit('mouse', data);
