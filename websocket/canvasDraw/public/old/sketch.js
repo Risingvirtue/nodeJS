@@ -103,8 +103,6 @@ function join() {
 	
 	noDraw = false;
 	$("#message").focus();
-	
-	
 }
 function switchPen(s) {
 	$("#" + size[currPen] + "Pen").toggleClass("selectSize");

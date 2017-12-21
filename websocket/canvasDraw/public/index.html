@@ -13,65 +13,66 @@
 		
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<link rel="stylesheet" type "text/css" href="main.css">
+		<link rel="stylesheet" type "text/css" href="newMain.css">
 		
 	</head>
 	
 	<body>
 		
 		<div class="container-fluid">
-			
 			<div class="row text-center">
-				<div class="left">
-					<div class="absolute">
-						<button id="pencilButton" class="btn text-center" style="width: 70px"><i id="pencil" style="margin:auto"  class="fa fa-pencil" aria-hidden="true"></i></button>
-						<div class="pencilSize">
-							<button id="xsPen" class="btn dot" onclick="switchPen(0)"><div class="xs circle"></div></button>
-							<button id="smPen" class="btn dot" onclick="switchPen(1)"><div class="sm circle"></div></button>
-							<button id="mdPen" class="btn dot" onclick="switchPen(2)"><div class="md circle"></div></button>
-							<button id="lgPen" class="btn dot" onclick="switchPen(3)"><div class="lg circle"></div></button>
-						</div>
+				<div id="buttons" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top: 10px">
+					<div class="row text-center" style="background-color:red;">
+						<label class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></label>
+						<button id="lgPen" class="pencilSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchPen(3)"><div class="lg circle"></div></button>
+						<button id="mdPen" class="pencilSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchPen(2)"><div class="md circle"></div></button>
+						<button id="smPen" class="pencilSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchPen(1)"><div class="sm circle"></div></button>
+						<button id="xsPen" class="pencilSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchPen(0)"><div class="xs circle"></div></button>
+						<button id="pencilButton" class="btn text-center col-lg-3 col-md-3 col-sm-3 col-xs-3"><i id="pencil" style="margin:auto"  class="fa fa-pencil" aria-hidden="true"></i></button>
+					
 					</div>	
-						
-				
-					<div class="absolute lowerErase">
-						<button id="eraserButton" class="btn text-center" style="width: 70px"><i id="eraser" class="fa fa-eraser" style="margin:auto" aria-hidden="true"></i></button>
-						<div class="eraserSize">
-							<button id="xsEraser" class="btn dot" onclick="switchEraser(0)"><div class="xs circle blank"></div></button>
-							<button id="smEraser" class="btn dot" onclick="switchEraser(1)"><div class="sm circle blank"></div></button>
-							<button id="mdEraser" class="btn dot" onclick="switchEraser(2)"><div class="md circle blank"></div></button>
-							<button id="lgEraser" class="btn dot" onclick="switchEraser(3)"><div class="lg circle blank"></div></button>
-						</div>
+					<div class="row text-center">
+						<label class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></label>
+						<button id="lgEraser" class="eraserSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchEraser(3)"><div class="lg circle blank"></div></button>
+						<button id="mdEraser" class="eraserSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchEraser(2)"><div class="md circle blank"></div></button>
+						<button id="smEraser" class="eraserSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchEraser(1)"><div class="sm circle blank"></div></button>
+						<button id="xsEraser" class="eraserSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchEraser(0)"><div class="xs circle blank"></div></button>
+						<button id="eraserButton" class="btn text-center col-lg-3 col-md-3 col-sm-3 col-xs-3"><i id="eraser" class="fa fa-eraser" style="margin:auto" aria-hidden="true"></i></button>
 					</div>
 				</div>
-				<div class="inline">
-					<canvas id="canvas" class="border" height="600" width="800"></canvas>
-				</div>
-				<div class="box"> 
-					<textarea readonly class="border" id="text"></textarea>
-					<div>
-						<textarea class="border" id="message" type="text"></textarea>
-						<button id="send" class="text-center" onclick="send()">Send</button>
+				<div id="canvasContainer" class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="background-color: blue">
+					<div> 
+						<canvas id="canvas"></canvas>
+						<canvas id="memCanvas" style="display: none"></canvas>
 					</div>
-				</div>
-			</div>
-			
-			<div class="text-center row">
-				<label class="col-lg-3 col-md-3 col-xs-3 col-sm-3"></label>
-				<div id="slidecontainer" class="col-lg-5 col-md-5 col-xs-5 col-sm-5">
+					<div id="slidecontainer">
 					<input id="slider" type="range" min="0" max="305" value="155" class="slider" oninput="changeColor()">
 					<div style="margin-top: 10px">
 						<canvas id="colorCanvas"></canvas>
 					</div>
 				</div>
+				</div>
+				<div id="messenger" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="background-color: red">
+					
+					<div>
+						<textarea readonly class="border" id="text"></textarea>
+					</div>
+					<div style="margin:0px">
+						<textarea class="border" id="message" type="text"></textarea>					
+					</div>
+				</div>
 			</div>
-		</div>
-		
+			
+			<script src="newSketch.js"></script>
+			<script src="color.js"></script>
+			<script src="newColorCanvas.js"></script>
+			
+		<!--
 		<script src="color.js"></script>
 		<script src="sketch.js"></script>
 		<script src="colorCanvas.js"></script>
+		-->
 		<div id="myModal" class="modal">
-			
 			<div class="modal-content text-center">
 				<p>What is your name?</p>
 				<div><input id="name" type="text" placeholder="e.g. Jellyfish" /></div>

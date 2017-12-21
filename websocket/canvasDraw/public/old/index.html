@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type "text/css" href="main.css">
+		
+	</head>
+	
+	<body>
+		
+		<div class="container-fluid">
+			
+			<div class="row text-center">
+				<div class="left">
+					<div class="absolute">
+						<button id="pencilButton" class="btn text-center" style="width: 70px"><i id="pencil" style="margin:auto"  class="fa fa-pencil" aria-hidden="true"></i></button>
+						<div class="pencilSize">
+							<button id="xsPen" class="btn dot" onclick="switchPen(0)"><div class="xs circle"></div></button>
+							<button id="smPen" class="btn dot" onclick="switchPen(1)"><div class="sm circle"></div></button>
+							<button id="mdPen" class="btn dot" onclick="switchPen(2)"><div class="md circle"></div></button>
+							<button id="lgPen" class="btn dot" onclick="switchPen(3)"><div class="lg circle"></div></button>
+						</div>
+					</div>	
+						
+				
+					<div class="absolute lowerErase">
+						<button id="eraserButton" class="btn text-center" style="width: 70px"><i id="eraser" class="fa fa-eraser" style="margin:auto" aria-hidden="true"></i></button>
+						<div class="eraserSize">
+							<button id="xsEraser" class="btn dot" onclick="switchEraser(0)"><div class="xs circle blank"></div></button>
+							<button id="smEraser" class="btn dot" onclick="switchEraser(1)"><div class="sm circle blank"></div></button>
+							<button id="mdEraser" class="btn dot" onclick="switchEraser(2)"><div class="md circle blank"></div></button>
+							<button id="lgEraser" class="btn dot" onclick="switchEraser(3)"><div class="lg circle blank"></div></button>
+						</div>
+					</div>
+				</div>
+				<div class="inline">
+						<canvas id="canvas" class="border" height="600" width="800"></canvas>
+					<div class="slidecontainer">
+					
+						<input id="slider" type="range" min="0" max="305" value="155" class="slider" oninput="changeColor()">
+						<div style="margin-top: 10px">
+							<canvas id="colorCanvas"></canvas>
+						</div>
+					</div>
+				</div>
+				<div class="box">
+					<div>
+					<textarea readonly class="border" id="text"></textarea>
+					</div>
+					<div style="margin: 0px">
+						<textarea class="border" id="message" type="text"></textarea>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="text-center row">
+				<label class="col-lg-3 col-md-3 col-xs-3 col-sm-3"></label>
+				<div id="slidecontainer" class="col-lg-5 col-md-5 col-xs-5 col-sm-5">
+					<input id="slider" type="range" min="0" max="305" value="155" class="slider" oninput="changeColor()">
+					<div style="margin-top: 10px">
+						<canvas id="colorCanvas"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="color.js"></script>
+		<script src="sketch.js"></script>
+		<script src="colorCanvas.js"></script>
+		<div id="myModal" class="modal">
+			<div class="modal-content text-center">
+				<p>What is your name?</p>
+				<div><input id="name" type="text" placeholder="e.g. Jellyfish" /></div>
+				<br>
+				<button style="margin: auto" onclick="join()">Join</button>
+			</div>
+		</div>
+	</body>
+</html>
