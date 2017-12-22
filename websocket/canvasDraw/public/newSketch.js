@@ -37,8 +37,6 @@ $(document).ready(function() {
 	$(window).resize(function() {
 		fitToContainer(canvas);
 	});
-	
-	
 	$("#pencil").toggleClass("select");
 	$("#smPen").toggleClass("selectSize");
 	$("#smEraser").toggleClass("selectSize");
@@ -262,7 +260,6 @@ document.body.addEventListener("mousemove", function (e) {
 		draw(data);
 		mousePos.x = eX; mousePos.y = eY;
 	}
-
 });
 
 $("#pencilButton").click(function() {
