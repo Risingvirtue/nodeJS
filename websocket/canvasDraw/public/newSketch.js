@@ -60,7 +60,9 @@ function fitToContainer(canvas){
 	$("#text").css("height", Math.floor($(window).height() * 8 / 15));
 	$("#message").css("height", Math.floor($(window).height() * 2 / 15));
 	$("#names").css("height", Math.floor($(window).height() / 3));
-	$(".name").css("height", Math.floor($(window).height() / 15));
+	$(".name").css("height", Math.floor($(window).height() / 24));
+	$(".arrow").css("height", Math.floor($(window).height() / 24));
+	
 	
 }
 
@@ -96,23 +98,40 @@ function join() {
 function addList(data) {
 	list.push(data);
 	display();
-	$("#names").append(newName(data.icon, data.name, data.num));
+	
 }
 function addSelf(data) {
 	list.unshift(data);
-	$("#names").append(newName(data.icon, data.name, data.num, data.color));
+	display();
 }
 
-function newName(icon, name, num, color="#fff") {
-	console.log(color);
-	var ans = "<div id='" + num + "' class='row text-center'><p class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='color:" + color + "'>" + icon + 
-				"</p><div class='name col-lg-10 col-md-10 col-sm-10 col-xs-10'><p style='margin-top: 15px'>" + name + "</p></div></div>";
-	return ans;
+function display() {
+	if (noDraw) {
+		$("#row0").css("color", "black");
+	} else {
+		$("#row0").css("color", "#6A5ACD");
+	}
+	
+	for (var i =0; i < 4; i++) {
+		if (i < list.length) {
+			$("#row" + i).css("visibility", "visible");
+			$("#icon" + i).removeClass();
+			$("#icon" + i).addClass("fa");
+			$("#icon" + i).addClass(list[i].icon);
+			$("#name" + i).html(list[i].name); 
+		} else {
+			$("#row" + i).css("visibility", "hidden"); 
+		}
+	}
 }
 
 function rmList(data) {
-	console.log("#" + data.num);
-	$("#" + data.num).remove();
+	for (s of list) {
+		if (s.num == data.num) {
+			list.splice(list.indexOf(s),1);
+		}
+	}
+	display();
 }
 
 function send() {

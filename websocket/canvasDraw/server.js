@@ -42,7 +42,7 @@ function newConnection(socket) {
 			}
 		}
 		data.color = "#9370DB";
-		//socket.broadcast.emit('join', data);
+		socket.broadcast.emit('join', data);
 		socket.emit('selfJoin', data);
 	}
 	

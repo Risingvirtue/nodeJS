@@ -215,6 +215,6 @@ textarea:focus, input:focus{
 	height: 50px;
 }
 
-.hidden {
-	visibility: hidden;
+.textMargin {
+	margin-top: 15px;
 }
