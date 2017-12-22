@@ -205,6 +205,16 @@ textarea:focus, input:focus{
     outline: none;
 }
 
+.name {
+	height: 50px;
+	font-size: 16px;
+	
+}
 
+#names {
+	height: 50px;
+}
 
-
+.hidden {
+	visibility: hidden;
+}

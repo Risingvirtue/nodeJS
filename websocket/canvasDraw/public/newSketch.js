@@ -16,20 +16,28 @@ var color;
 var name;
 var animals = ["Rabbit", "Jellyfish", "Panda", "Deer", "Lobster", "Tiger", "Raccoon", "Shark", "Dolphin", "Hedgehog",
 "Cat", "Dog", "Hamster", "Piglet", "Octopus", "Derp", "Derpette", "Koala", "Kangaroo"];
+
 var inMemCanvas = document.getElementById('memCanvas');
 var inMemCtx = inMemCanvas.getContext('2d');
+var list = [];
 $(document).ready(function() {
 	fitToContainer(canvas);
 	ctx.fillStyle = 'white';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	//socket = io.connect('http://localhost:3000');
-	socket = io.connect('http://18.221.234.35');
+	socket = io.connect('http://localhost:3000');
+	//socket = io.connect('http://18.221.234.35');
 	socket.on('mouse', draw);
 	socket.on('dot', dotDraw);
 	socket.on('send', reSend);
+	socket.on('join', addList);
+	socket.on('selfJoin', addSelf);
+	socket.on('leave', rmList);
+	socket.on('nameInfo', addList);
 	$(window).resize(function() {
 		fitToContainer(canvas);
 	});
+	
+	
 	$("#pencil").toggleClass("select");
 	$("#smPen").toggleClass("selectSize");
 	$("#smEraser").toggleClass("selectSize");
@@ -49,6 +57,11 @@ function fitToContainer(canvas){
 	canvas.height = canvas.offsetHeight;
 	canvas.height = Math.floor($(window).height() * 2 / 3);
     ctx.drawImage(inMemCanvas, 0, 0, canvas.width, canvas.height);
+	$("#text").css("height", Math.floor($(window).height() * 8 / 15));
+	$("#message").css("height", Math.floor($(window).height() * 2 / 15));
+	$("#names").css("height", Math.floor($(window).height() / 3));
+	$(".name").css("height", Math.floor($(window).height() / 15));
+	
 }
 
 
@@ -72,10 +85,34 @@ function join() {
 	} else {
 		name = n;
 	}
+	var icon = icons[Math.floor(Math.random() * icons.length)];
+	var data = {icon: icon, name: name};
+	socket.emit('join', data);
 	$('.modal').css('display', 'none');
-	
 	noDraw = false;
 	$("#message").focus();
+}
+
+function addList(data) {
+	list.push(data);
+	display();
+	$("#names").append(newName(data.icon, data.name, data.num));
+}
+function addSelf(data) {
+	list.unshift(data);
+	$("#names").append(newName(data.icon, data.name, data.num, data.color));
+}
+
+function newName(icon, name, num, color="#fff") {
+	console.log(color);
+	var ans = "<div id='" + num + "' class='row text-center'><p class='col-lg-2 col-md-2 col-sm-2 col-xs-2' style='color:" + color + "'>" + icon + 
+				"</p><div class='name col-lg-10 col-md-10 col-sm-10 col-xs-10'><p style='margin-top: 15px'>" + name + "</p></div></div>";
+	return ans;
+}
+
+function rmList(data) {
+	console.log("#" + data.num);
+	$("#" + data.num).remove();
 }
 
 function send() {
@@ -95,11 +132,9 @@ function reSend(data) {
 
 
 function dotDraw(data) {
-	
 	ctx.beginPath();
 	var x = convert(data.x, canvas.width);
 	var y = convert(data.y, canvas.height);
-	//console.log(x, y);
 	ctx.arc(x, y, data.width / 2, 0, Math.PI * 2);
 	ctx.fillStyle= data.color;
 	ctx.fill();
@@ -124,9 +159,6 @@ function convert(x, length) {
 }
 
 document.body.addEventListener("mousedown", function (e) {
-	//console.log(canvas.width, canvas.height);
-	
-	
 	var c = $("#canvas").offset();
 	mouseDown = true;
 	mousePos.x = e.pageX - c.left;

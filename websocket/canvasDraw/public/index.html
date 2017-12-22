@@ -14,7 +14,7 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<link rel="stylesheet" type "text/css" href="newMain.css">
-		
+		<script src="icon.js"></script>
 	</head>
 	
 	<body>
@@ -22,7 +22,7 @@
 		<div class="container-fluid">
 			<div class="row text-center">
 				<div id="buttons" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top: 10px">
-					<div class="row text-center" style="background-color:red;">
+					<div class="row text-center">
 						<label class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></label>
 						<button id="lgPen" class="pencilSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchPen(3)"><div class="lg circle"></div></button>
 						<button id="mdPen" class="pencilSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchPen(2)"><div class="md circle"></div></button>
@@ -40,9 +40,9 @@
 						<button id="eraserButton" class="btn text-center col-lg-3 col-md-3 col-sm-3 col-xs-3"><i id="eraser" class="fa fa-eraser" style="margin:auto" aria-hidden="true"></i></button>
 					</div>
 				</div>
-				<div id="canvasContainer" class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="background-color: blue">
+				<div id="canvasContainer" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 					<div> 
-						<canvas id="canvas"></canvas>
+						<canvas id="canvas" class="border"></canvas>
 						<canvas id="memCanvas" style="display: none"></canvas>
 					</div>
 					<div id="slidecontainer">
@@ -52,13 +52,46 @@
 					</div>
 				</div>
 				</div>
-				<div id="messenger" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="background-color: red">
-					
+				<div id="messenger" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
 					<div>
 						<textarea readonly class="border" id="text"></textarea>
 					</div>
 					<div style="margin:0px">
 						<textarea class="border" id="message" type="text"></textarea>					
+					</div>
+					<div id="names">
+						<div class="row">
+							<p id="icon0" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+								<i class="fa fa-grav" aria-hidden="true"></i>
+							</p>
+							<div class="name col-lg-10 col-md-10 col-sm-10 col-xs-10">
+								<p id="name0" style="margin-top: 15px">Octopus</p>
+							</div>
+						</div>
+						<div class="row">
+							<p id="icon1" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+								<i class="fa fa-grav" aria-hidden="true"></i>
+							</p>
+							<div class="name col-lg-10 col-md-10 col-sm-10 col-xs-10">
+								<p id="name1" style="margin-top: 15px">Octopus</p>
+							</div>
+						</div>
+						<div class="row">
+							<p id="icon2" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+								<i class="fa fa-grav" aria-hidden="true"></i>
+							</p>
+							<div class="name col-lg-10 col-md-10 col-sm-10 col-xs-10">
+								<p id="name2" style="margin-top: 15px">Octopus</p>
+							</div>
+						</div>
+						<div class="row">
+							<p id="icon3" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+								<i class="fa fa-grav" aria-hidden="true"></i>
+							</p>
+							<div class="name col-lg-10 col-md-10 col-sm-10 col-xs-10">
+								<p id="name3" style="margin-top: 15px">Octopus</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

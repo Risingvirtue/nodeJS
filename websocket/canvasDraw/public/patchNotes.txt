@@ -1,0 +1,15 @@
+v0.3
+-Added color rectangle selection
+-Revamped entire formatting
+-Centered slider with canvas
+-Fixed bug where selecting canvas would turn it blue
+v0.2
+-Added chatbox
+-Created color slider
+-Added size selection for both eraser and pen
+-Added a join feature to associate names with sockets
+v0.1
+-Added selection for eraser and pen
+v0.0
+-Created canvas
+-Can draw

@@ -7,10 +7,9 @@ var colorMd = false;
 $(document).ready(function() {
 	fitToContainerColor(colorCanvas);
 	currColorPos = {x: colorCanvas.width - 10, y: 10};
-	//drawCanvas(rgbColor);
-	//drawRow(50, {r: 255, g: 255, b: 255}, {r: 38, g: 0, b: 255});
-	//console.log(pixelArr);
-	
+	$(window).resize(function() {
+		
+	});
 });
 
 function fitToContainerColor(canvas){
@@ -103,9 +102,9 @@ function drawCircle(x, y) {
 	colorCtx.closePath();
 }
 document.body.addEventListener("mousedown", function (e) {
-	var c = $("#colorCanvas").offset();
-	var x = Math.floor(e.pageX - c.left);
-	var y = Math.floor(e.pageY - c.top);
+	var rect = colorCanvas.getBoundingClientRect();
+	var x = Math.round((e.clientX-rect.left)/(rect.right-rect.left)*colorCanvas.width);
+    var y = Math.round((e.clientY-rect.top)/(rect.bottom-rect.top)*colorCanvas.height);
 	if (x < 0 || x > colorCanvas.width || y < 0 || y > colorCanvas.height) {
 		return;
 	}
@@ -115,6 +114,7 @@ document.body.addEventListener("mousedown", function (e) {
 	currColorPos.x = x;
 	currColorPos.y = y;
 	drawFromPixel(prevColor.x, prevColor.y);
+	console.log(x, colorCanvas.width);
 	drawCircle(x,y);
 	rgbColor = pixelArr[y][x];
 	color = convertColor(rgbColor);
@@ -127,9 +127,11 @@ document.body.addEventListener("mousemove", function (e) {
 	
 	if (colorMd) {
 		//colorCtx.clearRect(0,0, colorCanvas.width, colorCanvas.height);
-		var c = $("#colorCanvas").offset();
-		var x = e.pageX - c.left;
-		var y = e.pageY - c.top;
+		
+		var rect = colorCanvas.getBoundingClientRect();
+		var x = Math.round((e.clientX-rect.left)/(rect.right-rect.left)*colorCanvas.width);
+        var y = Math.round((e.clientY-rect.top)/(rect.bottom-rect.top)*colorCanvas.height);
+		
 		if (x < 0 || x > colorCanvas.width || y < 0 || y > colorCanvas.height) {
 			return;
 		}

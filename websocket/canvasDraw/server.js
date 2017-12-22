@@ -19,10 +19,46 @@ var io = socket(server);
 io.sockets.on('connection', newConnection);
 
 var s = [];
+var num = 0;
 function newConnection(socket) {
 	console.log('New Connection: ' + socket.id);
-	s.push(socket);
-	console.log(s);
+	for (d of s) {
+		if ('name' in d) {
+			var data = {icon: d.icon, name: d.name, num: d.num};
+			socket.emit('nameInfo', data);
+		}
+	}
+	s.push({socket: socket, id: socket.id, num: num});
+	console.log(s.length);
+	num += 1;
+	socket.on('join', joinMsg);
+	
+	function joinMsg(data) {
+		for (d of s) {
+			if (d.id == socket.id) {
+				d.name = data.name;
+				d.icon = data.icon;
+				data.num = d.num;
+			}
+		}
+		data.color = "#9370DB";
+		//socket.broadcast.emit('join', data);
+		socket.emit('selfJoin', data);
+	}
+	
+	socket.on('disconnect', remove);
+	
+	function remove() {
+		for (d of s) {
+			if (d.id == socket.id) {
+				var data = {num: d.num};
+				socket.broadcast.emit('leave', data);
+				s.splice(s.indexOf(d), 1);
+				return;
+			}
+		}
+	}
+  
 	socket.on('mouse', mouseMsg);
 	//socket.emit('color', color());
 	function mouseMsg(data) {
