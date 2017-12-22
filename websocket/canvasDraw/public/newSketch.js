@@ -20,12 +20,13 @@ var animals = ["Rabbit", "Jellyfish", "Panda", "Deer", "Lobster", "Tiger", "Racc
 var inMemCanvas = document.getElementById('memCanvas');
 var inMemCtx = inMemCanvas.getContext('2d');
 var list = [];
+var currIndex = 0;
 $(document).ready(function() {
 	fitToContainer(canvas);
 	ctx.fillStyle = 'white';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	socket = io.connect('http://localhost:3000');
-	//socket = io.connect('http://18.221.234.35');
+	//socket = io.connect('http://localhost:3000');
+	socket = io.connect('http://18.221.234.35');
 	socket.on('mouse', draw);
 	socket.on('dot', dotDraw);
 	socket.on('send', reSend);
@@ -106,25 +107,65 @@ function addSelf(data) {
 }
 
 function display() {
+	
 	if (noDraw) {
 		$("#row0").css("color", "black");
 	} else {
 		$("#row0").css("color", "#6A5ACD");
 	}
-	
 	for (var i =0; i < 4; i++) {
-		if (i < list.length) {
-			$("#row" + i).css("visibility", "visible");
-			$("#icon" + i).removeClass();
-			$("#icon" + i).addClass("fa");
-			$("#icon" + i).addClass(list[i].icon);
-			$("#name" + i).html(list[i].name); 
+		var index = i;
+		if (i != 0) {
+			index = i + currIndex;
+		}
+		
+		if (index < list.length) {
+			changeName(i, list[index].icon, list[index].name);
+			
 		} else {
-			$("#row" + i).css("visibility", "hidden"); 
+			$("#row" + index).css("visibility", "hidden"); 
+		}
+	}
+	buttonVisible();
+}
+
+function buttonVisible() {
+	if (list.length < 5) {
+		$("#up").css('visibility', 'hidden');
+		$("#down").css('visibility', 'hidden');
+	} else {
+		$("#down").css('visibility', 'visible');
+		$("#up").css('visibility', 'visible');
+		if (currIndex > 0) {
+			$("#up").css("color", "black");
+		} else {
+			$("#up").css("color", "#eee");
+		}
+		if (currIndex + 4 < list.length) {
+			$("#down").css("color", "black");
+			
+		} else {
+			$("#down").css("color", "#eee");
 		}
 	}
 }
 
+function up() {
+	currIndex = Math.max(0, currIndex - 1);
+	display();
+}
+function down() {
+	
+	currIndex = Math.min(list.length - 4, currIndex + 1);
+	display();
+}
+function changeName(i, icon, name) {
+	$("#row" + i).css("visibility", "visible");
+	$("#icon" + i).removeClass();
+	$("#icon" + i).addClass("fa");
+	$("#icon" + i).addClass(icon);
+	$("#name" + i).html(name);
+}
 function rmList(data) {
 	for (s of list) {
 		if (s.num == data.num) {
