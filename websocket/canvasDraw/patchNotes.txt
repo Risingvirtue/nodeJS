@@ -1,3 +1,6 @@
+v0.4.1
+-Fixed bug where chat does not scroll upwards
+-Internal reformatting of code
 v0.4
 -Added Player List
 -Fixed bug where color selection would not align with mouse cursor properly

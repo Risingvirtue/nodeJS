@@ -101,6 +101,7 @@ function drawCircle(x, y) {
 	colorCtx.stroke();
 	colorCtx.closePath();
 }
+
 document.body.addEventListener("mousedown", function (e) {
 	var rect = colorCanvas.getBoundingClientRect();
 	var x = Math.round((e.clientX-rect.left)/(rect.right-rect.left)*colorCanvas.width);

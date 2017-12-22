@@ -16,9 +16,7 @@
 		<link rel="stylesheet" type "text/css" href="newMain.css">
 		<script src="icon.js"></script>
 	</head>
-	
 	<body>
-		
 		<div class="container-fluid">
 			<div class="row text-center">
 				<div id="buttons" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top: 10px">
@@ -29,7 +27,6 @@
 						<button id="smPen" class="pencilSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchPen(1)"><div class="sm circle"></div></button>
 						<button id="xsPen" class="pencilSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchPen(0)"><div class="xs circle"></div></button>
 						<button id="pencilButton" class="btn text-center col-lg-3 col-md-3 col-sm-3 col-xs-3"><i id="pencil" style="margin:auto"  class="fa fa-pencil" aria-hidden="true"></i></button>
-					
 					</div>	
 					<div class="row text-center">
 						<label class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></label>
@@ -38,6 +35,11 @@
 						<button id="smEraser" class="eraserSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchEraser(1)"><div class="sm circle blank"></div></button>
 						<button id="xsEraser" class="eraserSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchEraser(0)"><div class="xs circle blank"></div></button>
 						<button id="eraserButton" class="btn text-center col-lg-3 col-md-3 col-sm-3 col-xs-3"><i id="eraser" class="fa fa-eraser" style="margin:auto" aria-hidden="true"></i></button>
+					</div>
+					<br><br><br><br><br><br>
+					<div class="row text-center">
+						<label class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="margin-left: -11.5px"></label>
+						<button class="btn text-center col-lg-4 col-md-4 col-sm-4 col-xs-4" onclick="canvasClear()">Clear!</button>
 					</div>
 				</div>
 				<div id="canvasContainer" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -59,7 +61,7 @@
 					<div style="margin:0px">
 						<textarea class="border" id="message" type="text"></textarea>					
 					</div>
-					<div id="names">
+					<div id="names" style="margin-top: 10px">
 						<div id="row0" class="row">
 							<p class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin:auto">
 								<i id="icon0" class="" aria-hidden="true"></i>
@@ -94,14 +96,13 @@
 						</div>
 						<div id="row4" class="row">
 							<label class="col-lg-7 col-md-7 col-sm-7 col-xs-7"></label>
-							<p class="arrow col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="up()">
+							<p class="col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="up()">
 								<i id="up" class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
 							</p>
-							<p class="arrow col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="down()">
+							<p class="col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="down()">
 								<i id="down" class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
 							</p>
 						</div>
-						
 					</div>
 				</div>
 			</div>
@@ -109,7 +110,7 @@
 			<script src="newSketch.js"></script>
 			<script src="color.js"></script>
 			<script src="newColorCanvas.js"></script>
-			<script src="tablet.js"></script>
+		
 			
 		<!--
 		<script src="color.js"></script>

@@ -76,6 +76,11 @@ function newConnection(socket) {
 	function myMsg(data) {
 		socket.broadcast.emit('send', data);
 	}
+	socket.on('clear', clear);
+	
+	function clear(data) {
+		socket.broadcast.emit('clear', data);
+	}
 }
 
 function color() {
