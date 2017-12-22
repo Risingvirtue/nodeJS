@@ -162,15 +162,15 @@ function buttonVisible() {
 		$("#down").css('visibility', 'visible');
 		$("#up").css('visibility', 'visible');
 		if (currIndex > 0) {
-			$("#up").css("color", "black");
-		} else {
 			$("#up").css("color", "#eee");
+		} else {
+			$("#up").css("color", "black");
 		}
 		if (currIndex + 4 < list.length) {
-			$("#down").css("color", "black");
+			$("#down").css("color", "#eee");
 			
 		} else {
-			$("#down").css("color", "#eee");
+			$("#down").css("color", "black");
 		}
 	}
 }

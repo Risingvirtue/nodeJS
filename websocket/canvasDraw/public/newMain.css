@@ -26,14 +26,15 @@
 	border-width: 5px;
 	border-image: linear-gradient(#E6E6FA, #9370DB);
 	border-image-slice: 1;
+	
 }
 
 #canvas {
-	border-radius: 0%;
 	z-index: -1;
 	pointer-events: none;
 	margin-top: 10px;
-
+	text-shadow: 2px 2px;
+    box-shadow: 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 
@@ -221,3 +222,7 @@ textarea:focus, input:focus{
 	margin-top: 15px;
 }
 
+.botRow {
+	background-color: white;
+	margin: auto;
+}
