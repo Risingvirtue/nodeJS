@@ -16,10 +16,10 @@
 		<link rel="stylesheet" type "text/css" href="newMain.css">
 		<script src="icon.js"></script>
 	</head>
-	<body>
+	<body background="wood.png">
 		<div class="container-fluid">
 			<div class="row text-center">
-				<div id="buttons" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top: 10px">
+				<div id="buttons" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top: 10px; margin-right: -20px">
 					<div class="row text-center">
 						<label class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></label>
 						<button id="lgPen" class="pencilSize btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchPen(3)"><div class="lg circle"></div></button>
@@ -59,7 +59,7 @@
 						<textarea readonly class="border" id="text"></textarea>
 					</div>
 					<div style="margin:0px">
-						<textarea class="border" id="message" type="text"></textarea>					
+						<textarea class="border" id="message" maxlength="50" type="text"></textarea>					
 					</div>
 					<div id="names" style="margin-top: 10px">
 						<div id="row0" class="row">
@@ -120,7 +120,7 @@
 		<div id="myModal" class="modal">
 			<div class="modal-content text-center">
 				<p>What is your name?</p>
-				<div><input id="name" type="text" placeholder="e.g. Jellyfish" /></div>
+				<div><input maxlength="15" id="name" type="text" placeholder="e.g. Jellyfish" /></div>
 				<br>
 				<button style="margin: auto" onclick="join()">Join</button>
 			</div>
