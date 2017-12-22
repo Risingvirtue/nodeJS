@@ -18,6 +18,7 @@
 	</head>
 	<body background="wood.png">
 		<div class="container-fluid">
+		
 			<div class="row text-center">
 				<div id="buttons" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top: 10px; margin-right: -20px">
 					<div class="row text-center">
@@ -38,9 +39,16 @@
 					</div>
 					
 					<div class="row text-center">
-						<label class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="margin-left: -11.5px"></label>
-						<button class="btn col-lg-3 col-md-3 col-sm-3 col-xs-3" onclick="canvasClear()">Clear!</button>
+						<label class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></label>
+						<button class="size btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchEraser(3)"><div class="lg circle blank"></div></button>
+						<button class="size btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchEraser(2)"><div class="md circle blank"></div></button>
+						<button class="size btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchEraser(1)"><div class="sm circle blank"></div></button>
+						<button class="size btn dot col-lg-2 col-md-2 col-sm-2 col-xs-2" onclick="switchEraser(0)"><div class="xs circle blank"></div></button>
+						<button class="btn col-lg-3 col-md-3 col-sm-3 col-xs-3" onclick="canvasClear()">
+							Clear!
+						</button>
 					</div>
+					
 				</div>
 				<div id="canvasContainer" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 					<div> 
@@ -106,7 +114,8 @@
 					</div>
 				</div>
 			</div>
-			
+			<a href="../patchNotes.md" class="patch">Patch Notes</a>
+		</div>
 			<script src="newSketch.js"></script>
 			<script src="color.js"></script>
 			<script src="newColorCanvas.js"></script>
