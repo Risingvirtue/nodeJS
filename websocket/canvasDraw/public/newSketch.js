@@ -60,8 +60,8 @@ function fitToContainer(canvas){
 	$("#text").css("height", Math.floor($(window).height() * 8 / 15));
 	$("#message").css("height", Math.floor($(window).height() * 2 / 15));
 	$("#names").css("height", Math.floor($(window).height() / 3));
-	$(".name").css("height", Math.floor($(window).height() / 24));
-	$(".arrow").css("height", Math.floor($(window).height() / 24));
+	$(".name").css("height", Math.floor($(window).height() / 30));
+	$(".arrow").css("height", Math.floor($(window).height() / 30));
 	
 	
 }
