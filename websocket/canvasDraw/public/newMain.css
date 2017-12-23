@@ -269,7 +269,7 @@ textarea:focus, input:focus{
 	border-radius: 50%;
 	border-width: 5px;
 	border-color: grey;
-	background: linear-gradient(white 50%, #DC143C 50%);
+	background: linear-gradient(white 0%, #DC143C 0%);
 	
 }
 

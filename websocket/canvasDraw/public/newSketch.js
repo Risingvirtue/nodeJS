@@ -20,7 +20,9 @@ var inMemCanvas = document.getElementById('memCanvas');
 var inMemCtx = inMemCanvas.getContext('2d');
 var list = [];
 var currIndex = 0;
-
+var currTime = 60;
+var maxTime = 60;
+var timer = false;
 $(document).ready(function() {
 	fitToContainer(canvas);
 	//fill to white
@@ -46,6 +48,8 @@ $(document).ready(function() {
 	$("#smEraser").toggleClass("selectSize");
 	$("#up").css('visibility', 'hidden');
 	$("#down").css('visibility', 'hidden');
+	
+	startGame();
 });
 
 
@@ -106,6 +110,39 @@ function switchEraser(s) {
 	currEraser = s;
 }
 
+//handle timer
+function startGame(data) {
+	timer = true;
+	interval = setInterval(update, 100);
+}
+
+var lastTime = Date.now();
+var total = 0;
+function update() {
+	var time = Date.now();
+	let diffTime = time - lastTime;
+	total += diffTime;
+	lastTime = time;
+	//console.log(diffTime);
+	if (total > 1000) {
+		total -= 1000;
+		currTime -= 1;
+		$('#time').html(currTime);
+		var percent = Math.floor(100 * currTime / maxTime);
+		
+		var gradient = 'linear-gradient(white ' + (100 - percent) + "%, #DC143C " + 0 + "%)";
+		
+		$('.time').css('background', gradient);
+	}
+	if (currTime == 0) {
+		console.log('terminate');
+		clearInterval(interval);
+	}
+}
+
+
+
+
 //when a person joins the room: adds name and icon to chat
 function join() {
 	fitToContainer(canvas);
@@ -157,6 +194,7 @@ function display() {
 	}
 	buttonVisible();
 }
+
 //helper function to display names
 function changeName(i, icon, name) {
 	$("#row" + i).css("visibility", "visible");
@@ -264,7 +302,7 @@ document.body.addEventListener("mousedown", function (e) {
 	var x = Math.round((e.clientX-rect.left)/(rect.right-rect.left) * canvas.width);
     var y = Math.round((e.clientY-rect.top)/(rect.bottom-rect.top) * canvas.height);
 	var c = $("#canvas").offset();
-	console.log(e.pageX - c.left, x);
+	//console.log(e.pageX - c.left, x);
 	mousePos.x = x;
 	mousePos.y = y;
 	if (mousePos.x < 0 || mousePos.x > canvas.width || mousePos.y < 0 || mousePos.y > canvas.height) {
