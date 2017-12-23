@@ -1,3 +1,6 @@
+v0.4.2.1
+-Centered clear button
+-Created gradient for textboxes
 v0.4.2
 -Added background and gradient
 -Added box-shadow

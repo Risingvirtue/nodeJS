@@ -1,3 +1,8 @@
+.body {
+	font-family: Arial;
+}
+
+
 /* The Modal (background) */
 .modal {
     display: block; /* Hidden by default */
@@ -206,7 +211,7 @@
 }
 textarea {
     resize: none;
-	overflow:hidden;
+	
 	
 }
 
@@ -237,4 +242,25 @@ textarea:focus, input:focus{
 	position: absolute;
 	bottom: 0px;
 	left: 10px;
+}
+
+.vertical {
+	vertical-align: center:
+}
+
+.time {
+	font-size: 25px;
+	height: 100px;
+	width: 100px;
+	border-radius: 100%;
+	border-width: 1px;
+	
+	background: linear-gradient(white 50%, blue 50%);
+	
+}
+
+.rowNoPadding {
+	
+	background-color: red;
+	padding-left: -100px !important;
 }

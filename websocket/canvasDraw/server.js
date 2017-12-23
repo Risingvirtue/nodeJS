@@ -54,6 +54,7 @@ function newConnection(socket) {
 				var data = {num: d.num};
 				socket.broadcast.emit('leave', data);
 				s.splice(s.indexOf(d), 1);
+				console.log('number left in server" ', s.length);
 				return;
 			}
 		}
