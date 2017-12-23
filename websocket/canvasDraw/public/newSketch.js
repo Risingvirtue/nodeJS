@@ -58,16 +58,29 @@ function fitToContainer(canvas){
 	canvas.style.height='100%';
 	// ...then set the internal size to match
 	canvas.width  = canvas.offsetWidth;
+	
 	canvas.height = canvas.offsetHeight;
 	canvas.height = Math.floor($(window).height() * 2 / 3);
+	
     ctx.drawImage(inMemCanvas, 0, 0, canvas.width, canvas.height);
 	$("#text").css("height", Math.floor($(window).height() * 8 / 15));
 	$("#message").css("height", Math.floor($(window).height() * 2 / 15));
 	$("#names").css("height", Math.floor($(window).height() / 3));
 	$(".name").css("height", Math.floor($(window).height() / 30));
 	$(".arrow").css("height", Math.floor($(window).height() / 30));
+	changeGame();
 	
 }
+
+function changeGame() {
+	$(".game").css('width', canvas.width);
+	$(".game").css('height', canvas.height / 6);
+	$(".well").css('height', canvas.height / 6);
+	$(".title").css('font-size', canvas.width / 20);
+	$(".time").css('height', canvas.height / 5);
+	$(".time").css('width', canvas.height / 5);
+}
+
 function receiveClear() {
 	ctx.clearRect(0,0, canvas.width, canvas.height);
 	ctx.fillStyle = "white";
@@ -95,6 +108,7 @@ function switchEraser(s) {
 
 //when a person joins the room: adds name and icon to chat
 function join() {
+	fitToContainer(canvas);
 	var n = $("#name").val();
 	if (n == "") {
 		name = animals[Math.floor(Math.random() * animals.length)];
@@ -244,13 +258,15 @@ function draw(data) {
 function convert(x, length) {
 	return Math.floor(x * length);
 }
-
-
 document.body.addEventListener("mousedown", function (e) {
-	var c = $("#canvas").offset();
 	mouseDown = true;
-	mousePos.x = e.pageX - c.left;
-	mousePos.y = e.pageY - c.top;
+	var rect = canvas.getBoundingClientRect();
+	var x = Math.round((e.clientX-rect.left)/(rect.right-rect.left) * canvas.width);
+    var y = Math.round((e.clientY-rect.top)/(rect.bottom-rect.top) * canvas.height);
+	var c = $("#canvas").offset();
+	console.log(e.pageX - c.left, x);
+	mousePos.x = x;
+	mousePos.y = y;
 	if (mousePos.x < 0 || mousePos.x > canvas.width || mousePos.y < 0 || mousePos.y > canvas.height) {
 		return;
 	}
@@ -271,9 +287,10 @@ document.body.addEventListener("mousemove", function (e) {
 		return;
 	}
 	var c = $("#canvas").offset();
-	//console.log(mousePos);
-	eX = e.pageX - c.left;
-	eY = e.pageY - c.top;
+	//console.log(e.pageX - offset.left);
+	var rect = canvas.getBoundingClientRect();
+	var eX = Math.round((e.clientX-rect.left) / (rect.right-rect.left) * canvas.width);
+    var eY = Math.round((e.clientY-rect.top) / (rect.bottom-rect.top) * canvas.height);
 	if (mouseDown && !erase) {
 		var width = (currPen + 1) * 5; 
 		var data = {x1: mousePos.x / canvas.width, y1: mousePos.y / canvas.height, 

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- Arizonia -->
+		<link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
 		<!-- Font Awesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -18,7 +20,7 @@
 	</head>
 	<body background="wood.png">
 		<div class="container-fluid">
-		
+			<p class="title unselectable">Draw!</p>
 			<div class="row text-center">
 				<div id="buttons" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top: 10px; margin-right: 0px">
 					<div class="row text-center">
@@ -52,29 +54,29 @@
 				</div>
 				<div id="canvasContainer" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 					<div>
-						<div class="row rowNoPadding text-center">
-							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Hello</label>
+						<div class="row text-center game">
+							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></label>
 							<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 								<label class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></label>
 								<div class="well col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 15px">
-									<p>_ _ _ _</p>
+									<p style="font-size: 30px" class="unselectable">_ _ _ _</p>
 								</div>
 							</div>
-							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-								<button disabled class="vertical time">20</button>
+							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top: 10px">
+								<button disabled class="vertical time unselectable">20</button>
 							</div>
 						</div>
 						<div class="row">
-						<canvas id="canvas" class="border"></canvas>
+						<canvas id="canvas" class="border unselectable"></canvas>
 						<canvas id="memCanvas" style="display: none"></canvas>
 						</div>
 					</div>
-					<div id="slidecontainer">
+					<div id="slidecontainer" class="row">
 					<input id="slider" type="range" min="0" max="305" value="155" class="slider" oninput="changeColor()">
 					<div style="margin-top: 10px">
 						<canvas id="colorCanvas"></canvas>
 					</div>
-				</div>
+					</div>
 				</div>
 				<div id="messenger" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
 					<div>
@@ -112,7 +114,7 @@
 							<p class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin:auto">
 								<i id="icon3" class="" aria-hidden="true"></i>
 							</p>
-							<div class="name col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<div class="name col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<p class="textMargin" id="name3"></p>
 							</div>
 						</div>

@@ -2,6 +2,24 @@
 	font-family: Arial;
 }
 
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.title {
+	position: absolute;
+	top: 35%;
+	left: 4%;
+	font: 400 50px/1.3 'Arizonia', Helvetica, sans-serif;
+	font-size: 50px;
+	color: #FFD700;
+	text-shadow: 4px 4px 0px rgba(0,0,0,0.1); 
+}
 
 /* The Modal (background) */
 .modal {
@@ -45,10 +63,6 @@
 
 
 .slidecontainer {
-	width: 800px;
-	display: inline-block;
-	text-align: center;
-	background-color: orange;
 }
 
 .slider {
@@ -249,18 +263,18 @@ textarea:focus, input:focus{
 }
 
 .time {
-	font-size: 25px;
+	font-size: 40px;
 	height: 100px;
 	width: 100px;
-	border-radius: 100%;
-	border-width: 1px;
-	
-	background: linear-gradient(white 50%, blue 50%);
+	border-radius: 50%;
+	border-width: 5px;
+	border-color: grey;
+	background: linear-gradient(white 50%, #DC143C 50%);
 	
 }
 
-.rowNoPadding {
-	
-	background-color: red;
-	padding-left: -100px !important;
+.game {
+	position: absolute;
+	margin-top: 10px;
+
 }
