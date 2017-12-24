@@ -1,6 +1,7 @@
 v0.5.1
 -Added functionality to guessing
 -Added non functional score and pen for current player
+-Internal reorganization
 v0.5
 -Fixed bug where mouse drag would not change color palette
 -Added wells and timer
