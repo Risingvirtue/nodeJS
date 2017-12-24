@@ -27,20 +27,36 @@ function startGame(data) {
 	correct = false;
 	var str = generateBlank(data.word);
 	$("#word").html(str);
+	changeDraw(data.num);
+	console.log(data);
+	display();
 }
 
+function startDraw(data) {
+	drawing = true;
+	$("#word").html(data.word);
+	changeDraw(data.num);
+	console.log(data);
+	display();
+}
 
+function changeDraw(num) {
+	
+	for (p of list) {
+		if (p.num == num) {
+			p.draw = true;
+		} else {
+			p.draw = false;
+		}
+	}
+	
+}
 function update(data) {
 	//console.log(data);
 	$('#time').html(data.currTime);
 	var percent = Math.floor(100 * data.currTime / data.maxTime);
 	var gradient = 'linear-gradient(white ' + (100 - percent) + "%, #DC143C " + 0 + "%)";
 	$('.time').css('background', gradient);
-}
-
-function startDraw(data) {
-	drawing = true;
-	$("#word").html(data.word);
 }
 
 function updateWord(data) {

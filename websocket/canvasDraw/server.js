@@ -28,6 +28,7 @@ var revealedIndex = [];
 var currPlayer;
 var playerList = [];
 var playerIndexes = [];
+var inProgress = false;
 function newConnection(socket) {
 	console.log('New Connection: ' + socket.id);
 	for (d of s) {
@@ -71,20 +72,27 @@ function newConnection(socket) {
 	socket.on('start', initiate);
 	
 	function initiate() {
+		if (inProgress) {
+			return;
+		}
+		inProgress = true;
 		console.log('initiate');
+		//clearInterval(interval);
+		currTime = maxTime;
 		playerList = [];
 		playerIndexes = [];
 		for (var i =0; i < s.length; i++) {
-			playerList.push({socket: s[i].socket, id: s[i].id});
+			playerList.push({socket: s[i].socket, id: s[i].id,num: s[i].num});
 			playerIndexes.push(i);
 		}
-		var randPlayer = Math.floor(Math.random() * playerIndexes.length) ;
+		var randPlayer = Math.floor(Math.random() * playerIndexes.length);
 		playerIndexes.splice(randPlayer, 1);
 		
 		currPlayer = playerList[randPlayer].socket;
+		var playerNum = playerList[randPlayer].num;
 		currWord = words.word();
 		revealedIndex = [];
-		var data = {word: currWord};
+		var data = {word: currWord, num: playerNum};
 		currPlayer.broadcast.emit('start', data);
 		currPlayer.emit('startDraw', data);
 		console.log(currWord);
@@ -114,6 +122,8 @@ function newConnection(socket) {
 		}
 		if (currTime == 0) {
 			clearInterval(interval);
+			currTime = maxTime;
+			inProgress = false;
 		}
 	}
 

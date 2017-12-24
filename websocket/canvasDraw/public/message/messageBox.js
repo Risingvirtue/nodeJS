@@ -43,7 +43,6 @@ function addSelf(data) {
 
 //shows sockets that are present (up to 4)
 function display() {
-	
 	if (noDraw) {
 		$("#row0").css("color", "black");
 	} else {
@@ -54,10 +53,15 @@ function display() {
 		if (i != 0) {
 			index = i + currIndex;
 		}
-		
 		if (index < list.length) {
-			changeName(i, list[index].icon, list[index].name);
-			
+			var player = list[index];
+			changeName(i, player.icon, player.name);
+			$("#score" + i).html(player.score);
+			$("#pencil" + i).removeClass();
+			if (player.draw) {
+				$("#pencil" + i).addClass('fa');
+				$('#pencil' + i).addClass('fa-pencil');
+			}
 		} else {
 			$("#row" + index).css("visibility", "hidden"); 
 		}
@@ -72,6 +76,7 @@ function changeName(i, icon, name) {
 	$("#icon" + i).addClass("fa");
 	$("#icon" + i).addClass(icon);
 	$("#name" + i).html(name);
+	
 }
 
 
