@@ -18,8 +18,16 @@ var io = socket(server);
 
 io.sockets.on('connection', newConnection);
 
+var words = require('./node_modules/names/words.js');
 var s = [];
 var num = 0;
+var currTime = 60;
+var maxTime = 60;
+var currWord;
+var revealedIndex = [];
+var currPlayer;
+var playerList = [];
+var playerIndexes = [];
 function newConnection(socket) {
 	console.log('New Connection: ' + socket.id);
 	for (d of s) {
@@ -59,11 +67,60 @@ function newConnection(socket) {
 			}
 		}
 	}
-  
+	
+	socket.on('start', initiate);
+	
+	function initiate() {
+		console.log('initiate');
+		playerList = [];
+		playerIndexes = [];
+		for (var i =0; i < s.length; i++) {
+			playerList.push({socket: s[i].socket, id: s[i].id});
+			playerIndexes.push(i);
+		}
+		var randPlayer = Math.floor(Math.random() * playerIndexes.length) ;
+		playerIndexes.splice(randPlayer, 1);
+		
+		currPlayer = playerList[randPlayer].socket;
+		currWord = words.word();
+		revealedIndex = [];
+		var data = {word: currWord};
+		currPlayer.broadcast.emit('start', data);
+		currPlayer.emit('startDraw', data);
+		console.log(currWord);
+		interval = setInterval(update, 1000);
+	}
+	
+	function update() {
+		currTime -= 1;
+		var data = {currTime: currTime, maxTime: maxTime};
+		io.sockets.emit('time', data);
+		if (currTime == 30) {
+			var index = Math.floor(Math.random() * currWord.length);
+			revealedIndex.push(index);
+			var d = {index: index, letter: currWord[index]};
+			//console.log(d);
+			io.sockets.emit('updateWord', d);
+		} else if (currTime == 15) {
+			var list = [];
+			for(var i = 0; i < currWord.length; i++) {
+				if (!revealedIndex.includes(i)) {
+					list.push(i);
+				}
+			}
+			var index = Math.floor(Math.random() * list.length);
+			var d = {index: index, letter: currWord[index]};
+			io.sockets.emit('updateWord', d);
+		}
+		if (currTime == 0) {
+			clearInterval(interval);
+		}
+	}
+
 	socket.on('mouse', mouseMsg);
-	//socket.emit('color', color());
 	function mouseMsg(data) {
 		socket.broadcast.emit('mouse', data);
+		
 	}
 	
 	socket.on('dot', dotMsg);
@@ -75,7 +132,15 @@ function newConnection(socket) {
 	socket.on('send', myMsg);
 	
 	function myMsg(data) {
-		socket.broadcast.emit('send', data);
+		if (data.message == currWord) {
+			if (socket.id != currPlayer) {
+				var d = {word: currWord};
+				socket.emit('correct', d);
+			}
+		} else {
+			io.sockets.emit('send', data);
+		}
+		
 	}
 	socket.on('clear', clear);
 	
@@ -83,7 +148,6 @@ function newConnection(socket) {
 		socket.broadcast.emit('clear', data);
 	}
 }
-
 function color() {
 	var index = Math.floor(Math.random() * colorNum.length);
 	var colorAnswer = colors[index];

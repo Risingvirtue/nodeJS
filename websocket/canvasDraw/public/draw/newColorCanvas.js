@@ -115,7 +115,7 @@ document.body.addEventListener("mousedown", function (e) {
 	currColorPos.x = x;
 	currColorPos.y = y;
 	drawFromPixel(prevColor.x, prevColor.y);
-	console.log(x, colorCanvas.width);
+	//console.log(x, colorCanvas.width);
 	drawCircle(x,y);
 	rgbColor = pixelArr[y][x];
 	color = convertColor(rgbColor);
@@ -142,5 +142,7 @@ document.body.addEventListener("mousemove", function (e) {
 		currColorPos.y = y;
 		drawFromPixel(prevColor.x, prevColor.y);
 		drawCircle(x,y);
+		rgbColor = pixelArr[y][x];
+		color = convertColor(rgbColor);
 	}
 });

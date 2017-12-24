@@ -15,10 +15,10 @@
 		
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<link rel="stylesheet" type "text/css" href="newMain.css">
-		<script src="icon.js"></script>
+		<link rel="stylesheet" type "text/css" href="./CSS/newMain.css">
+		
 	</head>
-	<body background="wood.png">
+	<body background="./img/wood.png">
 		<div class="container-fluid">
 			<p class="title unselectable">Draw!</p>
 			<div class="row text-center">
@@ -51,6 +51,8 @@
 						</button>
 					</div>
 					
+					<button class='btn' onclick="initiateGame()">Start</button>
+					
 				</div>
 				<div id="canvasContainer" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 					<div>
@@ -59,7 +61,7 @@
 							<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 								<label class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></label>
 								<div class="well col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 15px">
-									<p style="font-size: 30px" class="unselectable">_ _ _ _</p>
+									<p id="word" style="font-size: 30px" class="unselectable">_ _ _ _</p>
 								</div>
 							</div>
 							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin-top: 10px">
@@ -87,12 +89,18 @@
 					</div>
 					<div id="names" style="margin-top: 10px; margin-left: 1px;">
 						<div id="row0" class="row botRow">
-							<p class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin:auto">
+							<p class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin:0px;">
 								<i id="icon0" class="" aria-hidden="true"></i>
 							</p>
 							<div class="name col-lg-8 col-md-8 col-sm-8 col-xs-8">
 								<p class="textMargin" id="name0"></p>
 							</div>
+							<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center" style="margin-left: -30px;" >
+								<p id="score0" class="textMargin score"></p>
+							</div>
+							<p class="corner">
+								<i id="pencil0" class="" aria-hidden="true"></i>
+							</p>
 						</div>
 						<div id="row1" class="row botRow">
 							<p class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin:auto">
@@ -101,6 +109,12 @@
 							<div class="name col-lg-8 col-md-8 col-sm-8 col-xs-8">
 								<p class="textMargin" id="name1"></p>
 							</div>
+							<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center" style="margin-left: -30px;" >
+								<p id="score1" class="textMargin score"></p>
+							</div>
+							<p class="corner">
+								<i id="pencil1" class="" aria-hidden="true"></i>
+							</p>
 						</div>
 						<div id="row2" class="row botRow">
 							<p class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin:auto">
@@ -109,6 +123,12 @@
 							<div class="name col-lg-8 col-md-8 col-sm-8 col-xs-8">
 								<p class="textMargin" id="name2"></p>
 							</div>
+							<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center" style="margin-left: -30px;" >
+								<p id="score2" class="textMargin score"></p>
+							</div>
+							<p class="corner">
+								<i id="pencil2" class="" aria-hidden="true"></i>
+							</p>
 						</div>
 						<div id="row3" class="row botRow">
 							<p class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="margin:auto">
@@ -117,6 +137,12 @@
 							<div class="name col-lg-10 col-md-10 col-sm-10 col-xs-10">
 								<p class="textMargin" id="name3"></p>
 							</div>
+							<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center" style="margin-left: -30px;" >
+								<p id="score3" class="textMargin score"></p>
+							</div>
+							<p class="corner">
+								<i id="pencil3" class="" aria-hidden="true"></i>
+							</p>
 						</div>
 						<div id="row4" class="row">
 							<label class="col-lg-7 col-md-7 col-sm-7 col-xs-7"></label>
@@ -132,10 +158,14 @@
 			</div>
 			<a href="../patchNotes.md" class="patch">Patch Notes</a>
 		</div>
-			<script src="newSketch.js"></script>
-			<script src="color.js"></script>
-			<script src="newColorCanvas.js"></script>
-		
+			<script src="./draw/buttons.js"></script>
+			<script src="./message/resize.js"></script>
+			<script src="./message/icon.js"></script>
+			<script src="./draw/newSketch.js"></script>
+			<script src="./draw/color.js"></script>
+			<script src="./draw/newColorCanvas.js"></script>
+			<script src="./message/messageBox.js"></script>
+			<script src="./game/game.js"></script>
 			
 		<!--
 		<script src="color.js"></script>

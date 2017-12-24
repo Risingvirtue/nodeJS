@@ -1,3 +1,8 @@
+v0.5
+-Fixed bug where mouse drag would not change color palette
+-Added wells and timer
+-Added name on wood
+-Added shadow
 v0.4.2.1
 -Centered clear button
 -Created gradient for textboxes
@@ -12,7 +17,6 @@ v0.4
 -Fixed bug where color selection would not align with mouse cursor properly
 -Removed background color formatting
 -Added a feature where your own name goes on top of player list
-
 v0.3
 -Added color rectangle selection
 -Revamped entire formatting
