@@ -156,8 +156,66 @@
 					</div>
 				</div>
 			</div>
-			<a href="../patchNotes.md" class="patch">Patch Notes</a>
+			<a id="patchNotes" class="patch">Patch Notes</a>
 		</div>
+		
+		<div id="myModal" class="modal">
+			<div class="modal-content text-center">
+				<p>What is your name?</p>
+				<div><input maxlength="15" id="name" type="text" placeholder="e.g. Jellyfish" /></div>
+				<br>
+				<button style="margin: auto" onclick="join()">Join</button>
+			</div>
+		</div>
+		
+		
+		<div id="patch" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+			<p>v0.6 <br>
+				-Added a score system <br>
+				-Implemented delay and game continuation <br>
+				v0.5.1 <br>
+				-Added functionality to guessing <br>
+				-Added non functional score and pen for current player <br>
+				-Internal reorganization <br>
+				v0.5 <br>
+				-Fixed bug where mouse drag would not change color palette <br>
+				-Added wells and timer <br>
+				-Added name on wood <br>
+				-Added shadow <br>
+				v0.4.2.1 <br>
+				-Centered clear button <br>
+				-Created gradient for textboxes <br>
+				v0.4.2 <br>
+				-Added background and gradient <br>
+				-Added box-shadow <br>
+				v0.4.1<br>
+				-Fixed bug where chat does not scroll upwards<br>
+				-Internal reformatting of code<br>
+				v0.4<br>
+				-Added Player List<br>
+				-Fixed bug where color selection would not align with mouse cursor properly<br>
+				-Removed background color formatting<br>
+				-Added a feature where your own name goes on top of player list<br>
+				v0.3<br>
+				-Added color rectangle selection<br>
+				-Revamped entire formatting<br>
+				-Centered slider with canvas<br>
+				-Fixed bug where selecting canvas would turn it blue<br>
+				v0.2<br>
+				-Added chatbox<br>
+				-Created color slider<br>
+				-Added size selection for both eraser and pen<br>
+				-Added a join feature to associate names with sockets<br>
+				v0.1<br>
+				-Added selection for eraser and pen<br>
+				v0.0<br>
+				-Created canvas<br>
+				-Can draw</p>
+			</div>
+		</div>
+		
 			<script src="./draw/buttons.js"></script>
 			<script src="./message/resize.js"></script>
 			<script src="./message/icon.js"></script>
@@ -167,13 +225,6 @@
 			<script src="./message/messageBox.js"></script>
 			<script src="./game/game.js"></script>
 	
-		<div id="myModal" class="modal">
-			<div class="modal-content text-center">
-				<p>What is your name?</p>
-				<div><input maxlength="15" id="name" type="text" placeholder="e.g. Jellyfish" /></div>
-				<br>
-				<button style="margin: auto" onclick="join()">Join</button>
-			</div>
-		</div>
+		
 	</body>
 </html>

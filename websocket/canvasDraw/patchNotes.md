@@ -1,3 +1,6 @@
+v0.6
+-Added a score system
+-Implemented delay and game continuation
 v0.5.1
 -Added functionality to guessing
 -Added non functional score and pen for current player

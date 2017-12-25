@@ -27,6 +27,9 @@ $(document).ready(function() {
 
 //draws dots when mousedown
 function dotDraw(data) {
+	if (noDraw) {
+		return;
+	}
 	if (erase) {
 		data.color = "white";
 	}

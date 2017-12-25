@@ -103,6 +103,9 @@ function drawCircle(x, y) {
 }
 
 document.body.addEventListener("mousedown", function (e) {
+	if (noDraw) {
+		return;
+	}
 	var rect = colorCanvas.getBoundingClientRect();
 	var x = Math.round((e.clientX-rect.left)/(rect.right-rect.left)*colorCanvas.width);
     var y = Math.round((e.clientY-rect.top)/(rect.bottom-rect.top)*colorCanvas.height);
@@ -125,6 +128,9 @@ document.body.addEventListener("mouseup", function (e) {
 	colorMd = false;
 });
 document.body.addEventListener("mousemove", function (e) {
+	if (noDraw) {
+		return;
+	}
 	
 	if (colorMd) {
 		//colorCtx.clearRect(0,0, colorCanvas.width, colorCanvas.height);

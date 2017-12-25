@@ -22,7 +22,7 @@ function join() {
 	var icon = icons[Math.floor(Math.random() * icons.length)];
 	var data = {icon: icon, name: name};
 	socket.emit('join', data);
-	$('.modal').css('display', 'none');
+	$('#myModal').css('display', 'none');
 	noDraw = false;
 	$("#message").focus();
 }

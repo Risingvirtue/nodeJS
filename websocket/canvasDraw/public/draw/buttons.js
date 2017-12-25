@@ -2,7 +2,7 @@ var erase = false;
 var currPen = 1;
 var currEraser = 1;
 var size = ["xs", "sm", "md", "lg"];
-
+var patch = document.getElementById('patch');
 $(document).ready(function() {
 	//initiate active pen and size
 	$("#pencil").toggleClass("select");
@@ -72,3 +72,20 @@ function canvasClear() {
 	socket.emit('clear', data);
 }
 
+
+window.onclick = function(event) {
+    if (event.target == patch) {
+        $('#patch').css('display', 'none');
+		 noDraw = false;
+    }
+};
+
+$('#patchNotes').click(function() {
+	 $('#patch').css('display', 'block');
+	 noDraw = true;
+});
+
+$('.close').click(function() {
+	 $('#patch').css('display', 'none');
+	  noDraw = false;
+});

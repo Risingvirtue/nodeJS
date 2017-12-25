@@ -173,12 +173,13 @@ function newConnection(socket) {
 		
 		}
 		//updates time client and server side
-		currTime -= 1;
+		
 		var data = {currTime: currTime, maxTime: maxTime};
 		io.sockets.emit('time', data);
 		
 		//checks time 
 		timeCondition();
+		currTime -= 1;
 	}
 	
 	function timeCondition() {
