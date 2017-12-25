@@ -34,7 +34,7 @@ function newConnection(socket) {
 	//adds to player list on client side
 	for (d of s) {
 		if ('name' in d) {
-			var data = {icon: d.icon, name: d.name, num: d.num, score: d.score};
+			var data = {icon: d.icon, name: d.name, num: d.num, score: 0};
 			socket.emit('nameInfo', data);
 		}
 	}

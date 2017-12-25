@@ -284,6 +284,7 @@ textarea:focus, input:focus{
 
 .score {
 	font-size: 16px;
+	visibility: hidden;
 }
 
 .corner {

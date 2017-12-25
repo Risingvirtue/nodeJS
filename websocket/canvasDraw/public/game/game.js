@@ -24,6 +24,7 @@ function generateBlank(word) {
 
 //handle timer
 function startGame(data) {
+	$(".score").css('visibility', 'visible');
 	drawing = false;
 	correct = false;
 	var str = generateBlank(data.word);
@@ -35,6 +36,7 @@ function startGame(data) {
 }
 
 function startDraw(data) {
+	$(".score").css('visibility', 'visible');
 	drawing = true;
 	$("#word").html(data.word);
 	changeDraw(data.num);
