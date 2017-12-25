@@ -26,8 +26,8 @@ var playerList = []; //current player list: snapshot of sockets
 var playerIndexes = []; //which players havent gone
 var inProgress = false; //game in progress?
 var numCorrect = 0; //number of players that guessed the word
-
-//var round = 0;
+var roundNum = 1;
+var roundLimit = 5;
 function newConnection(socket) {
 	console.log('New Connection: ' + socket.id);
 	
@@ -110,6 +110,8 @@ function newConnection(socket) {
 			playerList.push({socket: s[i].socket, name: s[i].name, id: s[i].id, num: s[i].num, correct: false, gone: false, score: 0});
 			playerIndexes.push(i);
 		}
+		var d = {round: roundNum};
+		io.sockets.emit('sendRound', d);
 		startRound();
 	}
 	
@@ -119,6 +121,7 @@ function newConnection(socket) {
 		if (playerList.length <= 1) {
 			return;
 		}
+		
 		//generates random index for player
 		var tempNum = choosePlayer();
 		console.log(playerList, tempNum);
@@ -164,13 +167,7 @@ function newConnection(socket) {
 	function update() {
 		//checks end round
 		if (numCorrect + 1 == playerList.length) {
-			if (playerIndexes.length == 0) {
-				resetRow();
-			}
-			numCorrect = 0;
-			resetRound();
-			setTimeout(startRound, 3000);
-		
+			endRound();
 		}
 		//updates time client and server side
 		
@@ -194,16 +191,44 @@ function newConnection(socket) {
 		
 		//resets round when time runs out
 		if (currTime == 0) {
-			if (playerIndexes.length == 0) {
-				resetRow();
-			}
-			resetRound();
 			var d = {word: currWord};
 			io.sockets.emit('correct', d);
-			setTimeout(startRound, 3000);
+			endRound();
+			
 		}
 	}
 	
+	function endRound() {
+		if (playerIndexes.length == 0) {
+			resetRow();
+			roundNum += 1;
+			if (roundNum < roundLimit) {
+				var d = {round: roundNum};
+				io.sockets.emit('sendRound', d);
+			}
+			
+		}
+		resetRound();
+		numCorrect = 0;
+		if (roundNum < roundLimit) {
+			setTimeout(startRound, 3000);
+		} else {
+			roundNum = 1;
+			var arr = sort();
+			var data = arr[0];
+			setTimeout(function() {io.sockets.emit('winner', data)}, 2000);
+		}
+	}
+	
+	function sort() {
+		var arr = [];
+		for (p of playerList) {
+			arr.push({name: p.name, score: p.score});
+		}
+		
+		var arr = arr.sort(function(a,b) {return b.score - a.score;});
+		return arr;
+	}
 	function revealLetter() {
 		var list = [];
 		for(var i = 0; i < currWord.length; i++) {

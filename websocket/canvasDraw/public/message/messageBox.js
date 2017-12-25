@@ -6,6 +6,8 @@ $(document).ready(function() {
 	socket.on('leave', rmList);
 	socket.on('nameInfo', addList);
 	socket.on('sendCorrect', sendCorrect);
+	socket.on('sendRound', sendRound);
+	socket.on('winner', displayWinner);
 	$("#up").css('visibility', 'hidden');
 	$("#down").css('visibility', 'hidden');
 });
@@ -142,5 +144,15 @@ function reSend(data) {
 
 function sendCorrect(name) {
 	var str = name.name[0].toUpperCase() + name.name.substring(1) + " has guessed the word!\n";
+	$("#text").val($("#text").val() +  str);
+}
+
+function sendRound(data) {
+	var str = "Round " + data.round + " start!\n"
+	$("#text").val($("#text").val() +  str);
+}
+
+function displayWinner(data) {
+	var str = data.name[0].toUpperCase() + data.name.substring(1) + " has won with " + data.score + " points!\n";
 	$("#text").val($("#text").val() +  str);
 }
