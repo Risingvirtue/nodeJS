@@ -26,11 +26,11 @@ function generateBlank(word) {
 function startGame(data) {
 	$(".score").css('visibility', 'visible');
 	drawing = false;
+	noDraw = true;
 	correct = false;
 	var str = generateBlank(data.word);
 	$("#word").html(str);
 	changeDraw(data.num);
-	//console.log(data);
 	console.log(data.num, list);
 	display();
 }
@@ -38,6 +38,7 @@ function startGame(data) {
 function startDraw(data) {
 	$(".score").css('visibility', 'visible');
 	drawing = true;
+	noDraw = false;
 	$("#word").html(data.word);
 	changeDraw(data.num);
 	console.log(data.num, list);

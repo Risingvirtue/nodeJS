@@ -13,6 +13,7 @@ $(document).ready(function() {
 //when a person joins the room: adds name and icon to chat
 function join() {
 	fitToContainer(canvas);
+	joined = true;
 	var n = $("#name").val();
 	if (n == "") {
 		name = animals[Math.floor(Math.random() * animals.length)];
@@ -41,7 +42,7 @@ function addSelf(data) {
 
 //shows sockets that are present (up to 4)
 function display() {
-	if (noDraw) {
+	if (!joined) {
 		$("#row0").css("color", "black");
 	} else {
 		$("#row0").css("color", "#6A5ACD");
@@ -126,8 +127,9 @@ function send() {
 	message = message.split('\n').join('');
 	if (message != "") {
 		var data = {name: name, message: message};
-		socket.emit('send', data);
+		console.log(data);
 		$("#message").val("");
+		socket.emit('send', data);
 		
 	}
 }

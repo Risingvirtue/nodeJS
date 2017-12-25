@@ -264,7 +264,6 @@ function newConnection(socket) {
 		if (data.message == currWord) {
 			if (socket.id != currPlayer.id) {
 				if (markCorrect(socket.id) == 1) {
-					
 					var d = {word: currWord};
 					socket.emit('correct', d);
 					numCorrect += 1;

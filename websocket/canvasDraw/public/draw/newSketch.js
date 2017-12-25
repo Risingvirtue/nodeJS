@@ -12,13 +12,14 @@ var name;
 var currIndex = 0;
 var drawing = false;
 var correct = false;
+var joined = false;
 $(document).ready(function() {
 	fitToContainer(canvas);
 	//fill to white
 	ctx.fillStyle = 'white';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	//socket = io.connect('http://localhost:3000');
-	socket = io.connect('http://18.221.234.35');
+	socket = io.connect('http://localhost:3000');
+	//socket = io.connect('http://18.221.234.35');
 	//listening to server
 	socket.on('mouse', draw);
 	socket.on('dot', dotDraw);
@@ -113,7 +114,7 @@ document.body.addEventListener("mousemove", function (e) {
 document.body.addEventListener("keyup", function (e) {
 	var keyCode = e.keyCode;
 	if (keyCode == '13') {
-		if (noDraw) {
+		if (!joined) {
 			join();
 		} else {
 			send();
