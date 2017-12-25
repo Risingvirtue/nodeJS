@@ -1,10 +1,10 @@
-
 $(document).ready(function() {
 	socket.on('start', startGame);
 	socket.on('startDraw', startDraw);
 	socket.on('time', update);
 	socket.on('updateWord', updateWord);
 	socket.on('correct', correct);
+	socket.on('updateScore', updateScore);
 });
 
 function initiateGame() {
@@ -40,7 +40,6 @@ function startDraw(data) {
 	drawing = true;
 	$("#word").html(data.word);
 	changeDraw(data.num);
-	//console.log(data);
 	console.log(data.num, list);
 	display();
 }
@@ -52,13 +51,10 @@ function changeDraw(num) {
 		} else {
 			p.draw = false;
 		}
-	}
-	
+	}	
 }
 
-
 function update(data) {
-	//console.log(data);
 	$('#time').html(data.currTime);
 	var percent = Math.floor(100 * data.currTime / data.maxTime);
 	var gradient = 'linear-gradient(white ' + (100 - percent) + "%, #DC143C " + 0 + "%)";
@@ -76,4 +72,13 @@ function updateWord(data) {
 function correct(data) {
 	$("#word").html(data.word);
 	correct = true;
+}
+
+function updateScore(data) {
+	for (p of list) {
+		if (p.num == data.num) {
+			p.score = data.score;
+		}
+	}
+	display();
 }

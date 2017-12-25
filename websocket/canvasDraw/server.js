@@ -27,7 +27,7 @@ var playerIndexes = []; //which players havent gone
 var inProgress = false; //game in progress?
 var numCorrect = 0; //number of players that guessed the word
 
-
+//var round = 0;
 function newConnection(socket) {
 	console.log('New Connection: ' + socket.id);
 	
@@ -107,7 +107,7 @@ function newConnection(socket) {
 		revealedIndex = [];
 		//snapshots current sockets and adds additional information
 		for (var i = 0; i < s.length; i++) {
-			playerList.push({socket: s[i].socket, id: s[i].id, num: s[i].num, correct: false, gone: false});
+			playerList.push({socket: s[i].socket, name: s[i].name, id: s[i].id, num: s[i].num, correct: false, gone: false, score: 0});
 			playerIndexes.push(i);
 		}
 		startRound();
@@ -169,10 +169,8 @@ function newConnection(socket) {
 			}
 			numCorrect = 0;
 			resetRound();
-			if (playerIndexes.length == 0) {
-				resetRow();
-			}
-			startRound();
+			setTimeout(startRound, 3000);
+		
 		}
 		//updates time client and server side
 		currTime -= 1;
@@ -186,22 +184,11 @@ function newConnection(socket) {
 	function timeCondition() {
 		//reveal a letter
 		if (currTime == Math.floor(maxTime / 2)) {
-			var index = Math.floor(Math.random() * currWord.length);
-			revealedIndex.push(index);
-			var d = {index: index, letter: currWord[index]};
-			io.sockets.emit('updateWord', d);
+			revealLetter();
 			
 		//reveal a second letter
 		} else if (currTime == Math.floor(maxTime / 4)) {
-			var list = [];
-			for(var i = 0; i < currWord.length; i++) {
-				if (!revealedIndex.includes(i)) {
-					list.push(i);
-				}
-			}
-			var index = Math.floor(Math.random() * list.length);
-			var d = {index: index, letter: currWord[index]};
-			io.sockets.emit('updateWord', d);
+			revealLetter();
 		}
 		
 		//resets round when time runs out
@@ -210,15 +197,33 @@ function newConnection(socket) {
 				resetRow();
 			}
 			resetRound();
-			startRound();
+			var d = {word: currWord};
+			io.sockets.emit('correct', d);
+			setTimeout(startRound, 3000);
 		}
 	}
 	
+	function revealLetter() {
+		var list = [];
+		for(var i = 0; i < currWord.length; i++) {
+			if (!revealedIndex.includes(i)) {
+				list.push(i);
+			}
+		}
+		var index = Math.floor(Math.random() * list.length);
+		revealedIndex.push(index);
+		var d = {index: index, letter: currWord[index]};
+		io.sockets.emit('updateWord', d);
+	}
 	//resets round
 	function resetRound() {
 		clearInterval(interval);
 		currTime = maxTime;
 		inProgress = false;
+		//resets correctness
+		for (p of playerList) {
+			p.correct = false;
+		}
 	}
 	
 	//change all player's gone status to false
@@ -258,9 +263,18 @@ function newConnection(socket) {
 		if (data.message == currWord) {
 			if (socket.id != currPlayer.id) {
 				if (markCorrect(socket.id) == 1) {
+					
 					var d = {word: currWord};
 					socket.emit('correct', d);
 					numCorrect += 1;
+					
+					if (numCorrect == 1) {
+						currTime  = Math.floor(maxTime / 4);
+						revealLetter();
+						update();
+					}
+					var name = {name: getName(socket.id)};
+					io.sockets.emit('sendCorrect', name);
 					console.log('numCorrect: ', numCorrect);
 				}
 			}
@@ -278,16 +292,29 @@ function newConnection(socket) {
 	}
 }
 
-//helper function to identify correct
+//helper function to identify correct and update score
 function markCorrect(id) {
 	for (p of playerList) {
 		if (p.id == id) {
 			if (p.correct) {
 				return 0;
 			} else {
+				p.correct = true;
+				p.score += currTime;
+				var data = {num: p.num, score: p.score};
+				io.sockets.emit('updateScore', data);
 				return 1;
 			}
 		}
 	}
 	return 0;
+}
+
+function getName(id) {
+	for (p of s) {
+		if (p.id == id) {
+			return p.name;
+		}
+	}
+	return '';
 }

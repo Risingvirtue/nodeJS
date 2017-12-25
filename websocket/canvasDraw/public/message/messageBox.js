@@ -5,6 +5,7 @@ $(document).ready(function() {
 	socket.on('selfJoin', addSelf);
 	socket.on('leave', rmList);
 	socket.on('nameInfo', addList);
+	socket.on('sendCorrect', sendCorrect);
 	$("#up").css('visibility', 'hidden');
 	$("#down").css('visibility', 'hidden');
 });
@@ -135,4 +136,9 @@ function reSend(data) {
 	$("#text").val($("#text").val() + data.name + ": " + data.message + "\n");
 	var m = document.getElementById('text');
 	m.scrollTop = m.scrollHeight;
+}
+
+function sendCorrect(name) {
+	var str = name.name[0].toUpperCase() + name.name.substring(1) + " has guessed the word!\n";
+	$("#text").val($("#text").val() +  str);
 }
