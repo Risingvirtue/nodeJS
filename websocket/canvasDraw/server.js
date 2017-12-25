@@ -29,6 +29,7 @@ var currPlayer;
 var playerList = [];
 var playerIndexes = [];
 var inProgress = false;
+var numCorrect = 0;
 function newConnection(socket) {
 	console.log('New Connection: ' + socket.id);
 	for (d of s) {
@@ -68,7 +69,7 @@ function newConnection(socket) {
 			}
 		}
 	}
-	
+
 	socket.on('start', initiate);
 	
 	function initiate() {
@@ -77,28 +78,29 @@ function newConnection(socket) {
 		}
 		inProgress = true;
 		console.log('initiate');
-		//clearInterval(interval);
 		currTime = maxTime;
 		playerList = [];
 		playerIndexes = [];
+		revealedIndex = [];
 		for (var i =0; i < s.length; i++) {
 			playerList.push({socket: s[i].socket, id: s[i].id,num: s[i].num});
 			playerIndexes.push(i);
 		}
+		startRound();
+	}
+	
+	function startRound() {
 		var randPlayer = Math.floor(Math.random() * playerIndexes.length);
 		playerIndexes.splice(randPlayer, 1);
-		
 		currPlayer = playerList[randPlayer].socket;
 		var playerNum = playerList[randPlayer].num;
 		currWord = words.word();
-		revealedIndex = [];
 		var data = {word: currWord, num: playerNum};
 		currPlayer.broadcast.emit('start', data);
 		currPlayer.emit('startDraw', data);
 		console.log(currWord);
 		interval = setInterval(update, 1000);
 	}
-	
 	function update() {
 		currTime -= 1;
 		var data = {currTime: currTime, maxTime: maxTime};
@@ -144,6 +146,7 @@ function newConnection(socket) {
 	function myMsg(data) {
 		if (data.message == currWord) {
 			if (socket.id != currPlayer) {
+				
 				var d = {word: currWord};
 				socket.emit('correct', d);
 			}
@@ -163,4 +166,8 @@ function color() {
 	var colorAnswer = colors[index];
 	colorNum.splice(index, 1);
 	return colorAnswer;
+}
+
+function isCorrect(id) {
+	for (
 }
