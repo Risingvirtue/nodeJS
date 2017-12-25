@@ -27,16 +27,13 @@ function join() {
 }
 
 function addList(data) {
-	data.score = 0;
-	data.draw = false;
+	
 	list.push(data);
 	display();
 	
 }
 
 function addSelf(data) {
-	data.score = 0;
-	data.draw = false;
 	list.unshift(data);
 	display();
 }

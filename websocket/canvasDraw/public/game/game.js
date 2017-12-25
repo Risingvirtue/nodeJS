@@ -10,6 +10,7 @@ $(document).ready(function() {
 function initiateGame() {
 	socket.emit('start');
 }
+
 function generateBlank(word) {
 	var str = "";
 	for (var i =0; i < word.length; i++) {
@@ -28,7 +29,8 @@ function startGame(data) {
 	var str = generateBlank(data.word);
 	$("#word").html(str);
 	changeDraw(data.num);
-	console.log(data);
+	//console.log(data);
+	console.log(data.num, list);
 	display();
 }
 
@@ -36,12 +38,12 @@ function startDraw(data) {
 	drawing = true;
 	$("#word").html(data.word);
 	changeDraw(data.num);
-	console.log(data);
+	//console.log(data);
+	console.log(data.num, list);
 	display();
 }
 
 function changeDraw(num) {
-	
 	for (p of list) {
 		if (p.num == num) {
 			p.draw = true;
@@ -51,6 +53,8 @@ function changeDraw(num) {
 	}
 	
 }
+
+
 function update(data) {
 	//console.log(data);
 	$('#time').html(data.currTime);
