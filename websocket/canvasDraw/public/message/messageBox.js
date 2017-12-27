@@ -145,14 +145,20 @@ function reSend(data) {
 function sendCorrect(name) {
 	var str = name.name[0].toUpperCase() + name.name.substring(1) + " has guessed the word!\n";
 	$("#text").val($("#text").val() +  str);
+	var m = document.getElementById('text');
+	m.scrollTop = m.scrollHeight;
 }
 
 function sendRound(data) {
 	var str = "Round " + data.round + " start!\n"
 	$("#text").val($("#text").val() +  str);
+	var m = document.getElementById('text');
+	m.scrollTop = m.scrollHeight;
 }
 
 function displayWinner(data) {
 	var str = data.name[0].toUpperCase() + data.name.substring(1) + " has won with " + data.score + " points!\n";
 	$("#text").val($("#text").val() +  str);
+	var m = document.getElementById('text');
+	m.scrollTop = m.scrollHeight;
 }

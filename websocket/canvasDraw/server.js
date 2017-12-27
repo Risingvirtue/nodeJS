@@ -115,13 +115,14 @@ function newConnection(socket) {
 		startRound();
 	}
 	
+	
 	//starts a round
 	function startRound() {
 		//ends round if there's only 1 player
 		if (playerList.length <= 1) {
 			return;
 		}
-		
+		io.sockets.emit('clear', {});
 		//generates random index for player
 		var tempNum = choosePlayer();
 		console.log(playerList, tempNum);
@@ -217,6 +218,7 @@ function newConnection(socket) {
 			var arr = sort();
 			var data = arr[0];
 			setTimeout(function() {io.sockets.emit('winner', data)}, 2000);
+			
 		}
 	}
 	
@@ -309,7 +311,7 @@ function newConnection(socket) {
 		
 	}
 	
-	//clears for other players
+	//s for other players
 	socket.on('clear', clear);
 	
 	function clear(data) {
