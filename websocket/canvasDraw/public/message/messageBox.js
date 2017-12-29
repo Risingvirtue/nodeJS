@@ -31,7 +31,6 @@ function join() {
 }
 
 function addList(data) {
-	
 	list.push(data);
 	display();
 	
@@ -161,4 +160,5 @@ function displayWinner(data) {
 	$("#text").val($("#text").val() +  str);
 	var m = document.getElementById('text');
 	m.scrollTop = m.scrollHeight;
+	noDraw = true;
 }

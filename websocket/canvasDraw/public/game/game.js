@@ -76,10 +76,12 @@ function correct(data) {
 }
 
 function updateScore(data) {
+	console.log('data:', data);
 	for (p of list) {
 		if (p.num == data.num) {
 			p.score = data.score;
 		}
 	}
+	console.log('the scores are: ', list);
 	display();
 }

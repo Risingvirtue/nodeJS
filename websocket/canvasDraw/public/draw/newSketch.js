@@ -18,8 +18,8 @@ $(document).ready(function() {
 	//fill to white
 	ctx.fillStyle = 'white';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	//socket = io.connect('http://localhost:3000');
-	socket = io.connect('http://18.221.234.35');
+	socket = io.connect('http://localhost:3000');
+	//socket = io.connect('http://18.221.234.35');
 	//listening to server
 	socket.on('mouse', draw);
 	socket.on('dot', dotDraw);

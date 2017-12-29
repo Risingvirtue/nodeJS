@@ -17,11 +17,12 @@ io.sockets.on('connection', newConnection);
 var words = require('./node_modules/names/words.js');
 var s = []; //keeps track of sockets in server
 var num = 0; //unique number identifier
-var currTime = 60; //timers for game
-var maxTime = 60;
+var currTime = 90; //timers for game
+var maxTime = 90;
 var currWord; //what the current word to guess is
 var revealedIndex = []; //revealed letters of current word
 var currPlayer;
+var currPlayerID;
 var playerList = []; //current player list: snapshot of sockets
 var playerIndexes = []; //which players havent gone
 var inProgress = false; //game in progress?
@@ -30,7 +31,6 @@ var roundNum = 1;
 var roundLimit = 5;
 function newConnection(socket) {
 	console.log('New Connection: ' + socket.id);
-	
 	//adds to player list on client side
 	for (d of s) {
 		if ('name' in d) {
@@ -38,7 +38,6 @@ function newConnection(socket) {
 			socket.emit('nameInfo', data);
 		}
 	}
-	
 	//adds to socket list
 	s.push({socket: socket, id: socket.id, num: num});
 	
@@ -61,7 +60,6 @@ function newConnection(socket) {
 				data.draw = false;
 			}
 		}
-		
 		socket.broadcast.emit('join', data);
 		socket.emit('selfJoin', data);
 	}
@@ -75,7 +73,7 @@ function newConnection(socket) {
 				var data = {num: d.num};
 				socket.broadcast.emit('leave', data);
 				s.splice(s.indexOf(d), 1);
-				console.log('number left in server" ', s.length);
+				//console.log('number left in server" ', s.length);
 			}
 		}
 		
@@ -109,6 +107,8 @@ function newConnection(socket) {
 		for (var i = 0; i < s.length; i++) {
 			playerList.push({socket: s[i].socket, name: s[i].name, id: s[i].id, num: s[i].num, correct: false, gone: false, score: 0});
 			playerIndexes.push(i);
+			var data = {num:s[i].num, score: 0};
+			io.sockets.emit('updateScore', data);
 		}
 		var d = {round: roundNum};
 		io.sockets.emit('sendRound', d);
@@ -125,13 +125,13 @@ function newConnection(socket) {
 		io.sockets.emit('clear', {});
 		//generates random index for player
 		var tempNum = choosePlayer();
-		console.log(playerList, tempNum);
+		//console.log(playerList, tempNum);
 		
 		//uses socket
 		currPlayer = playerList[tempNum].socket;
 		
 		var playerNum = playerList[tempNum].num; //saves unique ID for drawing pencil
-		
+		currPlayerID = playerNum;
 		playerList[tempNum].gone = true; //marks the player
 		
 		currWord = words.word(); //saves curr word from randomly generated word
@@ -205,7 +205,8 @@ function newConnection(socket) {
 			roundNum += 1;
 			if (roundNum < roundLimit) {
 				var d = {round: roundNum};
-				io.sockets.emit('sendRound', d);
+				setTimeout(function() {io.sockets.emit('sendRound', d);}, 3000);
+				
 			}
 			
 		}
@@ -217,8 +218,8 @@ function newConnection(socket) {
 			roundNum = 1;
 			var arr = sort();
 			var data = arr[0];
+			console.log(arr);
 			setTimeout(function() {io.sockets.emit('winner', data)}, 2000);
-			
 		}
 	}
 	
@@ -227,7 +228,6 @@ function newConnection(socket) {
 		for (p of playerList) {
 			arr.push({name: p.name, score: p.score});
 		}
-		
 		var arr = arr.sort(function(a,b) {return b.score - a.score;});
 		return arr;
 	}
@@ -294,11 +294,14 @@ function newConnection(socket) {
 					var d = {word: currWord};
 					socket.emit('correct', d);
 					numCorrect += 1;
-					
-					if (numCorrect == 1) {
+					if (numCorrect == 1 && currTime > maxTime / 4) {
 						currTime  = Math.floor(maxTime / 4);
 						revealLetter();
 						update();
+						var score = getScore(currPlayerID);
+						var data = {num: currPlayerID, score: score + 15};
+						console.log('data', data);
+						io.sockets.emit('updateScore', data);
 					}
 					var name = {name: getName(socket.id)};
 					io.sockets.emit('sendCorrect', name);
@@ -335,6 +338,15 @@ function markCorrect(id) {
 		}
 	}
 	return 0;
+}
+
+function getScore(num) {
+	
+	for (p of playerList) {
+	if (p.num == num) {
+		return p.score;
+		}
+	}
 }
 
 function getName(id) {
